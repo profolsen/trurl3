@@ -20,3 +20,4 @@ io
 unlock 2
 io
 unlock 3
+halt

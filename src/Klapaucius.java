@@ -10,8 +10,8 @@ public class Klapaucius {
         };
         t.start();
         trurl.executeProgram("p1.txt");
-        trurl.executeProgram("p1.txt");
-        trurl.executeProgram("p1.txt");
+        trurl.executeProgram("p2.txt");
+        trurl.executeProgram("p3.txt");
         Thread.sleep(60000);
         t.interrupt();
     }
