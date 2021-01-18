@@ -1,2 +1,7 @@
 # Project exclude paths
 /out/
+/trurl3.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/uiDesigner.xml
+/.idea/vcs.xml
