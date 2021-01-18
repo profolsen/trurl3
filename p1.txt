@@ -1,0 +1,11 @@
+run
+reserve 2
+lock 1
+reserve 4
+lock 2
+io
+unlock 1
+run
+reserve 5
+unlock 2
+halt
