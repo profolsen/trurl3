@@ -1,0 +1,26 @@
+run
+lock 1
+lock 2
+reserve 10
+lock 3
+unlock 1
+unlock 2
+io
+reserve 2
+io
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+io
+unlock 3
+run
+run
+halt
