@@ -12,6 +12,8 @@ public class Trurl {
         LogUpdate.setConfiguration(config);
     }
 
+    //kind of the main point in the program:
+    //cycles the CPU every tenth of a second.
     public void run() {
         for(;;) {
             try {
