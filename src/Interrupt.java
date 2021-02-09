@@ -33,7 +33,8 @@ public interface Interrupt {  //an interface for interrupts.
                 source.setState(Process.TERMINATED);
                 c.cpu.setCurrent(null);
                 c.interruptLine.add(Interrupt.generateSchedulerInterrupt(c));
-                new LogUpdate(source.pid() + " terminated.");
+                new LogUpdate(source.pid() + " terminated in " + source.age(c.cpu.time()) + " cycles.");
+                new StatUpdate(StatUpdate.termination, source.age(c.cpu.time()));
             }
         };
     }

@@ -30,22 +30,24 @@ public class Process {
     private int state = -1; //state of the process.
     private Scanner pc = null; //gives the next instruction for the process.
     private File source; //the file the process is from; for debug purposes.
+    private int creationTime = -1; //the time at which the process was created.
 
     /**
      * Creates a process for a program.
      * @param program the File the program is found in.
      * @throws FileNotFoundException if the file isn't found.
      */
-    public Process(File program) throws FileNotFoundException {
+    public Process(File program, int creationTime) throws FileNotFoundException {
         source = program;
         id = ID_COUNTER++;
         state = NEW;
         pc = new Scanner(new FileInputStream(program));
+        this.creationTime = creationTime;
     }
 
     /** see Process(File).*/
-    public Process(String path) throws FileNotFoundException {
-        this(new File(path));
+    public Process(String path, int creationTime) throws FileNotFoundException {
+        this(new File(path), creationTime);
     }
 
     /**
@@ -109,4 +111,8 @@ public class Process {
 
     @Override
     public int hashCode()  {  return id;  }
+
+    public int age(int time) {
+        return time - creationTime;
+    }
 }

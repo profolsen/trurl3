@@ -7,6 +7,7 @@ public class CPU {
     Configuration config;  //A variable that holds reference to all the important parts of the simulation,
                 //e.g., CPU, ProcessQueues, Scheduler, etc.
     private Process current;  //the process that is currently on the CPU.
+    boolean statReports = true;
 
 
     //the main cycle code for the simulation.
@@ -14,9 +15,14 @@ public class CPU {
         time++; //time has progressed.
         if(config.interruptLine.isEmpty()) { //if there are no interrupts to handle
             if(current != null) { //and there is a process currently on the CPU
+                statReports = true;
                 step(current);  //let that process use this CPU cycle
-            } else { //otherwise, there is no process on the CPU
+            } else { //otherwise, there is no process on the CPU (the idle case)
                 if(time % 10 == 0) new LogUpdate("idle");  //log, idle cycles every ten cycles.
+                if(statReports) {
+                    statReports = false;
+                    StatUpdate.update(config);
+                }
             }
         } else { // there is an interrupt on the interrupt queue.
             config.interruptLine.remove().handleInterrupt();  //handle the interrupt
