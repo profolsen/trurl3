@@ -24,7 +24,7 @@ public class StatUpdate {
             for(Object o : stats.get(termination)) {
                 count++;
             }
-            new LogUpdate("Throughput: " + (count / (double)config.cpu.time()) * 10 + "processes/sec");
+            new LogUpdate("Throughput: " + (count / (double)config.cpu.time()) * 10 + " processes/sec");
         }
     }
 }
