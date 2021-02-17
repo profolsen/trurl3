@@ -9,8 +9,15 @@ public class Configuration {
     public Scheduler scheduler = Scheduler.DEFAULT;
     public LinkedList<Interrupt> interruptLine = new LinkedList<>();
     public Input inputDevice = new Input();
+    public Timer timer;
 
     public Configuration() {
         cpu.setConfiguration(this);
+        timer = new Timer(this, new Interrupt() {
+            @Override
+            public void handleInterrupt() {
+                new LogUpdate("timer interrupt!");  //this code is here to test the timer.
+            }
+        });
     }
 }

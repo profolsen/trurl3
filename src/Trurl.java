@@ -28,5 +28,6 @@ public class Trurl {
     public void executeProgram(String path) throws FileNotFoundException {
         Process p = new Process(path, config.cpu.time());
         config.interruptLine.add(Interrupt.generateNewProcessInterrupt(p, config));
+        config.timer.setAlarm(25);
     }
 }

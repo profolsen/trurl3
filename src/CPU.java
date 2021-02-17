@@ -28,6 +28,7 @@ public class CPU {
             config.interruptLine.remove().handleInterrupt();  //handle the interrupt
         }
         config.inputDevice.cycle(config); //the input device needs to be synchronized with the CPU.
+        config.timer.check();
         //NOTE: here synchronized means "stuff needs to happen at the same time", not the OS def. of synch.
     }
 
