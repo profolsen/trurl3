@@ -13,6 +13,6 @@ public class Klapaucius {
         trurl.executeProgram("p2.txt");
         trurl.executeProgram("p3.txt");
         Thread.sleep(60000);
-        t.interrupt();
+        t.stop();
     }
 }
