@@ -43,12 +43,17 @@ public interface Interrupt {  //an interface for interrupts.
     public static Interrupt generateIORequestInterrupt(Process source, Configuration c) {
         return new Interrupt() {
             public void handleInterrupt() {
+                if(!source.hasDoneIO()) new StatUpdate(StatUpdate.responseTime, source.age(c.cpu.time()));
                 source.setState(Process.WAITING);  //put the process in the waiting state.
                 c.wait.add(source);  //move to the wait queue. (it isn't on the ready queue, it's on the CPU)
                 c.cpu.setCurrent(null);  //empty the CPU.
                 c.interruptLine.add(Interrupt.generateSchedulerInterrupt(c)); //may need to reschedule (don't waste
                                         //CPU time!)
                 new LogUpdate(source.pid() + " requested i/o.");  //log the event.
+                //(1) be more careful with how we measure the time
+                //(2) don't count it the second time
+                //(3) keep track of when processes request i/o for the first time and use a boolean for each new process
+                // use it to check if the process requested i/o already.
             }
         };
     }

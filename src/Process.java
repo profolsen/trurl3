@@ -31,6 +31,7 @@ public class Process {
     private Scanner pc = null; //gives the next instruction for the process.
     private File source; //the file the process is from; for debug purposes.
     private int creationTime = -1; //the time at which the process was created.
+    private boolean hasDoneIO = false;
 
     /**
      * Creates a process for a program.
@@ -65,6 +66,7 @@ public class Process {
      * @param newState the new state the process should be in.
      */
     public void setState(int newState) {
+        if(newState == WAITING) hasDoneIO = true;
         state = newState;
     }
 
@@ -73,6 +75,8 @@ public class Process {
 
     //gets the state of the current process.
     public int state() {  return state;  }
+
+    public boolean hasDoneIO() {  return hasDoneIO;  }
 
 
     //Converts the state (an integer) into a readable string as follows:
