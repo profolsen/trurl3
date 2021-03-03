@@ -22,4 +22,8 @@ public class Timer {
     public void setAction(Interrupt action) {
         this.action = action;
     }
+
+    public void cancel() {
+        setAlarm(config.cpu.time() - 1);
+    }
 }
