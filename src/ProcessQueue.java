@@ -5,6 +5,7 @@ public interface ProcessQueue {
     public boolean isEmpty();
     public Process first();
     public void remove(Process p);
+    public int size();
 
     public static ProcessQueue FIFO_ProcessQueue() {
         return new ProcessQueue() {
@@ -22,6 +23,10 @@ public interface ProcessQueue {
             public boolean isEmpty() {  return queue.isEmpty();  }
 
             public String toString() {  return "" + queue;  }
+
+            public int size() {
+                return queue.size();
+            }
         };
     }
 }
