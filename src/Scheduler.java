@@ -7,6 +7,7 @@ public interface Scheduler {
             x.setState(Process.READY);
             config.ready.add(x);
         }
+        p.setState(Process.RUNNING);
         config.cpu.setCurrent(p);
     }
     public static final Scheduler DEFAULT = new Scheduler() {  //a default schedule.
