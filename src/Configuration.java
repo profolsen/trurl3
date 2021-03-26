@@ -10,6 +10,7 @@ public class Configuration {
     public LinkedList<Interrupt> interruptLine = new LinkedList<>();
     public Input inputDevice = new Input();
     public Timer timer;
+    public Process temp = Process.kernelProcess();
 
     public Configuration() {
         cpu.setConfiguration(this);

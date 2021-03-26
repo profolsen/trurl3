@@ -2,6 +2,7 @@ import java.util.LinkedList;
 
 public interface ProcessQueue {
     public void add(Process p);
+    public void addFront(Process p);
     public boolean isEmpty();
     public Process first();
     public void remove(Process p);
@@ -26,6 +27,10 @@ public interface ProcessQueue {
 
             public int size() {
                 return queue.size();
+            }
+
+            public void addFront(Process p) {
+                queue.addFirst(p);
             }
         };
     }

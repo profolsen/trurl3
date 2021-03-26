@@ -46,9 +46,26 @@ public class Process {
         this.creationTime = creationTime;
     }
 
+    /**
+     * Creates a process without a file.
+     * This is <i>only</i> used to create a kernel process, because kernel processes don't have files.
+     */
+    private Process() {
+        source = null;
+        id = ID_COUNTER++;
+        state = NEW;
+        pc = null;
+        creationTime = 0;
+    }
+
     /** see Process(File).*/
     public Process(String path, int creationTime) throws FileNotFoundException {
         this(new File(path), creationTime);
+    }
+
+    /** Creates a kernel process*/
+    public static Process kernelProcess() {
+        return new Process();
     }
 
     /**

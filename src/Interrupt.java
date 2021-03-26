@@ -31,7 +31,8 @@ public interface Interrupt {  //an interface for interrupts.
         return new Interrupt() {
             public void handleInterrupt() {
                 source.setState(Process.TERMINATED);
-                c.cpu.setCurrent(null);
+                //c.ready.remove(source); //now stored on the ready queue.
+                c.temp = null;
                 c.interruptLine.add(Interrupt.generateSchedulerInterrupt(c));
                 new LogUpdate(source.pid() + " terminated in " + source.age(c.cpu.time()) + " cycles.");
                 new StatUpdate(StatUpdate.termination, source.age(c.cpu.time()));
@@ -46,7 +47,7 @@ public interface Interrupt {  //an interface for interrupts.
                 if(!source.hasDoneIO()) new StatUpdate(StatUpdate.responseTime, source.age(c.cpu.time()));
                 source.setState(Process.WAITING);  //put the process in the waiting state.
                 c.wait.add(source);  //move to the wait queue. (it isn't on the ready queue, it's on the CPU)
-                c.cpu.setCurrent(null);  //empty the CPU.
+                c.temp = null;
                 c.interruptLine.add(Interrupt.generateSchedulerInterrupt(c)); //may need to reschedule (don't waste
                                         //CPU time!)
                 new LogUpdate(source.pid() + " requested i/o.");  //log the event.

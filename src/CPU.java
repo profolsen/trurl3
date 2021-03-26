@@ -18,18 +18,32 @@ public class CPU {
                 statReports = true;
                 step(current);  //let that process use this CPU cycle
             } else { //otherwise, there is no process on the CPU (the idle case)
-                if(time % 10 == 0) new LogUpdate("idle");  //log, idle cycles every ten cycles.
+                /*if(time % 10 == 0)*/ new LogUpdate("idle");  //log, idle cycles every ten cycles.
                 if(statReports) {
                     statReports = false;
                     StatUpdate.update(config);
                 }
             }
         } else { // there is an interrupt on the interrupt queue.
+            kernelSwitch();
             config.interruptLine.remove().handleInterrupt();  //handle the interrupt
+            kernelSwitch();
         }
         config.inputDevice.cycle(config); //the input device needs to be synchronized with the CPU.
         config.timer.check();
         //NOTE: here synchronized means "stuff needs to happen at the same time", not the OS def. of synch.
+    }
+
+    /**
+     * swaps roles of the temp process and the current process.
+     * One of the two must always be the kernel.
+     */
+    public void kernelSwitch() {
+        Process t = config.temp;
+        config.temp = current;
+        if(t != null) t.setState(Process.RUNNING);
+        current = t;
+        if(config.temp != null) config.temp.setState(Process.READY);
     }
 
     //this is where a process is advanced one step by the CPU.
