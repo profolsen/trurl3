@@ -18,7 +18,7 @@ public class CPU {
                 statReports = true;
                 step(current);  //let that process use this CPU cycle
             } else { //otherwise, there is no process on the CPU (the idle case)
-                /*if(time % 10 == 0)*/ new LogUpdate("idle");  //log, idle cycles every ten cycles.
+                if(time % 10 == 0) new LogUpdate("idle");  //log, idle cycles every ten cycles.
                 if(statReports) {
                     statReports = false;
                     StatUpdate.update(config);
