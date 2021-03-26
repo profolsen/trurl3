@@ -13,7 +13,7 @@ public interface Scheduler {
     }
     public static final Scheduler DEFAULT = new Scheduler() {  //a default schedule.
         public void schedule(Configuration config) {
-            new LogUpdate("(pre) Sched: CPU Ready: " + config.cpu.current() + " " + config.ready);  //log scheduling event.
+            new LogUpdate("(pre) ON CPU: " + config.cpu.current() + " READY QUEUE: " + config.ready);  //log scheduling event.
             if(!config.ready.isEmpty() && config.cpu.current().pid() == 1) {
                                                                         //if there's a ready process and either
                                                                         // CPU's process is null or it is the kernel and
@@ -22,7 +22,7 @@ public interface Scheduler {
                 config.ready.remove(target); //remove the first ready process
                 contextSwitch(config, target); //put the next ready process on the CPU.
             }
-            new LogUpdate("(post) Sched: CPU Ready: " + config.cpu.current() + " " + config.ready);  //log scheduling event.
+            new LogUpdate("(post) Sched: ON CPU: " + config.cpu.current() + " READY QUEUE: " + config.ready);  //log scheduling event.
         }
     };
 }
